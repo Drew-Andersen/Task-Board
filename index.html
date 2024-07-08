@@ -30,37 +30,37 @@
       <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Add Task</button>
     </div>
     <!-- Added a bootstrap modal form for adding a task -->
-    <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="add-task" aria-hidden="true">
-      <div class="modal-dialog">
+    <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="add-task">Add Task</h5>
+            <h5 class="modal-title" id="add-task-title">Add Task</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form class="row">
+            <form class="project-form row">
               <div class="mb-3 col-6">
-                <label for="recipient-name" class="col-form-label">Task Title</label>
-                <input type="text" class="form-control" id="recipient-name">
+                <label for="task-title" class="col-form-label">Task Title</label>
+                <input type="text" class="form-control" id="task-title" placeholder="Title">
               </div>
               <div class="mb-3 col-6">
-                <label for="date-picker" class="col-form-label">Task Due Date</label>
-                <input type="text" class="form-control" id="date-picker">
+                <label for="task-due-date" class="col-form-label">Task Due Date</label>
+                <input type="text" class="form-control" id="task-due-date" placeholder="Due Date">
               </div>
               <div class="mb-3 col-12">
-                <label for="message-text" class="col-form-label">Task Description</label>
-                <textarea class="form-control" id="message-text"></textarea>
+                <label for="task-description" class="col-form-label">Task Description</label>
+                <textarea class="form-control" id="task-description" placeholder="Description" rows="4" cols="50"></textarea>
               </div>
             </form>
           </div>
           <div class="modal-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-success">Add Task</button>
+            <button type="button" class="btn btn-success" id="submit-btn">Add Task</button>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="row swim-lanes text-center justify-content-between">
+    <div id="board" class="row swim-lanes text-center justify-content-between">
       <div class="col-12 col-lg-4 d-flex">
         <div id="to-do" class="card border-light mb-3 lane flex-grow-1">
           <div class="card-header bg-white">
@@ -97,8 +97,10 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+    <!-- Updated the JQuery UI with the most up to date code -->
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
     integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
 

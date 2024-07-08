@@ -1,3 +1,7 @@
+// Retrieve tasks and nextId from localStorage
+let taskList = JSON.parse(localStorage.getItem("tasks"));
+let nextId = JSON.parse(localStorage.getItem("nextId"));
+
 // Added the JavaScript for the Bootstrap modal from
 var formModal = $('formModal')
 formModal.on('show.bs.modal', function (event) {
@@ -5,9 +9,6 @@ formModal.on('show.bs.modal', function (event) {
   var button = event.relatedTarget
   // Extract info from data-bs-* attributes
   var recipient = button.getAttribute('data-bs-whatever')
-  // If necessary, you could initiate an AJAX request here
-  // and then do the updating in a callback.
-  //
   // Update the modal's content.
   var modalTitle = formModal.querySelector('.modal-title')
   var modalBodyInput = formModal.querySelector('.modal-body input')
@@ -15,16 +16,10 @@ formModal.on('show.bs.modal', function (event) {
   modalBodyInput.value = recipient
 })
 
-
-
-
-// Retrieve tasks and nextId from localStorage
-let taskList = JSON.parse(localStorage.getItem("tasks"));
-let nextId = JSON.parse(localStorage.getItem("nextId"));
-
-// Todo: create a function to generate a unique task id
+// Generates a unique 36 character task ID
 function generateTaskId() {
-
+    const taskID = crypto.randomUUID();
+    return taskID;
 }
 
 // Todo: create a function to create a task card
@@ -54,5 +49,23 @@ function handleDrop(event, ui) {
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
+    // Renders the task list from storage
+    renderTaskList();
+
+    // Add task event listener
+    $('submit-btn').on('click', handleAddTask);
+
+    // Delete task event listener
+    $('board').on('click', '.delete', handleDeleteTask);
+
+    // Makes the lanes droppable
+
+    // Creates a date picker
+    $( function() {
+        $("#task-due-date").datepicker({
+            changeMonth: true,
+            changeYear: true
+        });
+      } );
 
 });

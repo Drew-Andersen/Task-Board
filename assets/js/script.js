@@ -2,20 +2,6 @@
 let taskList = JSON.parse(localStorage.getItem("tasks")) || [];
 let nextId = JSON.parse(localStorage.getItem("nextId"));
 
-// // Added the JavaScript for the Bootstrap modal from
-// var formModal = $('formModal')
-// formModal.on('show.bs.modal', function (event) {
-//   // Button that triggered the modal
-//   var button = event.relatedTarget
-//   // Extract info from data-bs-* attributes
-//   var recipient = button.getAttribute('data-bs-whatever')
-//   // Update the modal's content.
-//   var modalTitle = formModal.querySelector('.modal-title')
-//   var modalBodyInput = formModal.querySelector('.modal-body input')
-
-//   modalBodyInput.value = recipient
-// })
-
 function readTasksFromStorage() {
     let storedProjects = JSON.parse(localStorage.getItem("tasks"));
     if (storedProjects !== null) {
@@ -97,7 +83,7 @@ function renderTaskList() {
     }
 
     // Make the cards draggable
-    $('#draggable').draggable({
+    $('.draggable').draggable({
         opacity: 0.7,
         zIndex: 100,
     })
@@ -140,9 +126,21 @@ function handleAddTask(event){
     $('#formModal').modal('toggle');
 }
 
-// Todo: create a function to handle deleting a task
 function handleDeleteTask(event){
     event.preventDefault();
+
+    const projectId = $(this).attr('data-project-id');
+    const projects = taskList;
+
+    // Removes the task that the 'Delete' button was clicked on
+    projects.forEach((project) => {
+        if (project.id === projectId) {
+            projects.splice(projects.indexOf(project), 1);
+        }
+    })
+    localStorage.setItem('tasks', JSON.stringify(projects));
+
+    renderTaskList();
 }
 
 // Todo: create a function to handle dropping a task into a new status lane
@@ -157,7 +155,7 @@ function handleDrop(event, ui) {
 
     // Find the project card bt the id and update the status
     for (project of projects) {
-        if (project.id === task.id) {
+        if (project.id === taskID) {
             project.status = newStatus;
         }
     }
